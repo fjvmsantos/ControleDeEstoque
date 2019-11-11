@@ -1,0 +1,59 @@
+==========================================
+              Nome da empresa              
+===========================================
+********** NAO E DOCUMENTO FISCAL *********
+===========================================
+PRODUTO      QTDE      VALOR UN.      VALOR
+111           0.0           3.09       3.09    
+===========================================
+   INFORMACOES PARA FECHAMENTO DE CONTA    
+===========================================
+ GARCOM  CONTA.DIV.  VAL.PESS. COVER  DESC.
+ garcom  dividirconta   vlpessoa  cover   desconto
+===========================================
+SubTotal                            10,00
+                   ------------------------
+Total                                10,00
+===========================================
+       MENSAGEM DA EMPRESA VAI AQUI        
+   INFORMACOES PARA FECHAMENTO DE CONTA    
+
+
+
+
+
+
+
+
+
+
+==========================================
+              Nome da empresa              
+===========================================
+********** NAO E DOCUMENTO FISCAL *********
+===========================================
+PRODUTO      QTDE      VALOR UN.      VALOR
+1             111     CARREGADOR PORTÁTIL        1.0    
+2             222     FONES DE OUVIDO        1.0    
+===========================================
+   INFORMACOES PARA FECHAMENTO DE CONTA    
+===========================================
+ GARCOM  CONTA.DIV.  VAL.PESS. COVER  DESC.
+ garcom  dividirconta   vlpessoa  cover   desconto
+===========================================
+SubTotal                            10,00
+                   ------------------------
+Total                                10,00
+===========================================
+       MENSAGEM DA EMPRESA VAI AQUI        
+   INFORMACOES PARA FECHAMENTO DE CONTA    
+
+
+
+
+
+
+
+
+
+

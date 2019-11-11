@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoConta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="150" leftMargin="20" rightMargin="425" topMargin="20" bottomMargin="20" uuid="056b2f57-b494-44e2-b9b0-65eede8e8480">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="213"/>
+	<parameter name="idPj" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numVenda" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT num_venda,valor_conta,valor_pago,data_movimento FROM estoque.extrato_conta_emhaver where cliente_pj = $P{idPj} and num_venda = $P{numVenda} order by data_movimento asc;]]>
+	</queryString>
+	<field name="num_venda" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_conta" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_movimento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalPago" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_pago}]]></variableExpression>
+	</variable>
+	<variable name="saldoDevedor" class="java.lang.Double">
+		<variableExpression><![CDATA[new Double(($F{valor_conta}.doubleValue())-($V{totalPago}.doubleValue()))]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="149" height="32" uuid="30d6a93b-b890-490d-8c08-7fb039695337"/>
+				<textElement textAlignment="Center">
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Casa Veterinária FF
+R. João Batista Brisola, 52
+Centro - Ribeirão Grande-SP
+Tel:15 3544 -1158]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="32" width="149" height="1" uuid="44c8de36-d466-473c-8a3a-cec496f48bdc"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="15" uuid="d2925444-edbc-4887-9370-fa1073781180"/>
+				<textElement>
+					<font fontName="SimSun" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Venda]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="14" width="149" height="1" uuid="615fb91b-1df3-4051-b60d-3f604a38095f"/>
+			</line>
+			<textField>
+				<reportElement x="81" y="1" width="58" height="13" uuid="a290841a-2370-4dcb-96b0-6692106376eb"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{num_venda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="10" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="10" uuid="dbac9a10-7ac2-4a6a-b538-ffd7caa246c9"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="0" width="58" height="10" uuid="9eed9ed6-b551-4a37-beeb-c63391483cc4"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Pagamento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="0" y="0" width="53" height="10" uuid="822ba9b6-61e8-42d3-9cc8-5133aee4dda2"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="71" y="0" width="58" height="10" uuid="c8e62b18-1c70-4047-9b4c-d11f1918f586"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_movimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="68" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="61" y="32" width="88" height="20" uuid="e66fd236-30dd-4dc6-8e5a-4acf192f0bd5"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="32" width="61" height="20" uuid="354bf9fa-53a8-4a52-a5af-121670a7ce67"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data e Hora]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="31" width="149" height="1" uuid="ead62434-7afe-4025-b9cb-94ff580b2bc3"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="11" width="71" height="10" uuid="da910afb-d469-419a-9515-55edb24d1ec5"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pago]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="71" y="11" width="68" height="10" uuid="96c1d584-7d09-4fd8-8d68-4c5465d1faf2"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="21" width="71" height="10" uuid="13d37ec1-6c74-4941-a29b-b579ae0ee351"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Devedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="71" height="10" uuid="0f402d82-914c-4e6d-af94-6066ea8cf29c"/>
+				<textElement>
+					<font fontName="SimSun" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Compra]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="71" y="1" width="68" height="10" uuid="ad9feca9-d8e6-4dff-bb24-63dfc1838a50"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_conta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="149" height="1" uuid="aaee8cc9-1514-4e99-bbe7-b929f7b89674"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="71" y="21" width="68" height="10" uuid="cb239eb0-4aef-4330-a563-76d75b441bbe"/>
+				<textElement>
+					<font fontName="SimSun" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldoDevedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="111" y="52" width="38" height="16" uuid="b59bcf3f-175d-4f01-b626-dbf5f4790b1b"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="5" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[JVM Software]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
